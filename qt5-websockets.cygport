@@ -1,0 +1,43 @@
+inherit qt5-qmake
+
+NAME="qt5-websockets"
+VERSION=5.4.1
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Qt C++ application framework (WebSockets API)"
+DESCRIPTION="Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+HOMEPAGE="http://qt-project.org/"
+SRC_URI="http://download.qt-project.org/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtwebsockets-opensource-src-${VERSION}.tar.xz"
+SRC_DIR="qtwebsockets-opensource-src-${VERSION}"
+
+PKG_NAMES="libQt5WebSockets5 libQt5WebSockets-devel ${NAME}-doc"
+libQt5WebSockets5_CONTENTS="
+	usr/bin/cygQt5WebSockets-5.dll
+	usr/lib/qt5/qml/Qt/WebSockets/
+	usr/share/doc/"
+libQt5WebSockets_devel_CONTENTS="
+	usr/include/qt5/QtWebSockets/
+	usr/lib/cmake/Qt5WebSockets/
+	usr/lib/libQt5WebSockets.*
+	usr/lib/pkgconfig/Qt5WebSockets.pc
+	usr/lib/qt5/mkspecs/modules/qt_lib_websockets.pri
+	usr/lib/qt5/mkspecs/modules/qt_lib_websockets_private.pri
+"
+qt5_websockets_doc_CATEGORY="Doc"
+qt5_websockets_doc_CONTENTS="usr/share/qt5/doc/qtwebsockets*"
+
+src_compile() {
+	cd ${B}
+	cygqmake5 ${S}
+	cygmake
+	cygmake docs
+}
+
+src_install() {
+	cd ${B}
+	qt5_qmake_install install_docs
+}
