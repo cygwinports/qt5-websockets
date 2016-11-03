@@ -1,7 +1,7 @@
 inherit qt5-qmake
 
 NAME="qt5-websockets"
-VERSION=5.5.1
+VERSION=5.6.2
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Qt C++ application framework (WebSockets API)"
@@ -10,11 +10,11 @@ embedded development. Qt enables programmers to create advanced GUI
 applications once and deploy them to Windows, Mac OS X and Linux without
 rewriting the source code. Companies using Qt can leverage software
 investments made on one platform across many others."
-HOMEPAGE="http://qt-project.org/"
-SRC_URI="http://download.qt-project.org/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtwebsockets-opensource-src-${VERSION}.tar.xz"
+HOMEPAGE="https://www.qt.io/"
+SRC_URI="http://download.qt.io/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtwebsockets-opensource-src-${VERSION}.tar.xz"
 SRC_DIR="qtwebsockets-opensource-src-${VERSION}"
 
-PKG_NAMES="libQt5WebSockets5 libQt5WebSockets-devel ${NAME}-doc"
+PKG_NAMES="libQt5WebSockets5 libQt5WebSockets-devel ${NAME}-doc ${NAME}-examples"
 libQt5WebSockets5_CONTENTS="
 	usr/bin/cygQt5WebSockets-5.dll
 	usr/lib/qt5/qml/Qt/WebSockets/
@@ -30,6 +30,8 @@ libQt5WebSockets_devel_CONTENTS="
 "
 qt5_websockets_doc_CATEGORY="Doc"
 qt5_websockets_doc_CONTENTS="usr/share/qt5/doc/qtwebsockets*"
+qt5_websockets_examples_CATEGORY="X11"
+qt5_websockets_examples_CONTENTS="usr/lib/qt5/examples/websockets/"
 
 src_compile() {
 	cd ${B}
